@@ -10,3 +10,7 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+# Resolving user
+def get_current_user() -> str:
+    return "dev-user-001"

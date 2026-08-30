@@ -11,12 +11,18 @@ class User(Base):
         String(50),
         primary_key=True
     )
+    email: Mapped[str] = mapped_column(
+        String(255),
+        unique=True,
+        nullable=False
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda:datetime.now(timezone.utc)
     )
     conversations: Mapped[list[Conversation]] = relationship(
-        back_populates="user"
+        back_populates="user",
+        cascade="all, delete-orphan"
     )
 
 # Conversations ORM
@@ -45,7 +51,8 @@ class Conversation(Base):
     )
 
     messages: Mapped[list[Message]] = relationship(
-        back_populates="conversation"
+        back_populates="conversation",
+        cascade = "all, delete-orphan"
     )
 
 # Message ORM
