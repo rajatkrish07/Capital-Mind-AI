@@ -41,7 +41,7 @@ class ConversationRepository:
         return result
 
     # Fetch conversations by user
-    def get_conversation_by_user(self, user_id: str) -> Sequence[Conversation]:
+    def get_conversations_by_user(self, user_id: str) -> Sequence[Conversation]:
         stmt = select(Conversation).where(
             Conversation.user_id == user_id
         ).order_by(
